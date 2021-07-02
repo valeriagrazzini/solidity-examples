@@ -56,6 +56,11 @@ contract('Dex', (accounts)=>{
 
     });
 
+    it('sould return tokens', async ()=> {
+        const tokens = await dex.getTokens()
+        assert(tokens.length === 4)
+    })
+
     it('sould deposit tokens', async ()=> {
         const amount = web3.utils.toWei('100');
         await dex.deposit(
@@ -318,7 +323,7 @@ contract('Dex', (accounts)=>{
             ), 'cannot trade DAI');
     })
 
-    it.only('should NOT create a market order if SIDE is BUY and the dai balance is too low', async () => {
+    it('should NOT create a market order if SIDE is BUY and the dai balance is too low', async () => {
         
         await dex.deposit(
             web3.utils.toWei('100'),
@@ -343,7 +348,7 @@ contract('Dex', (accounts)=>{
             ), 'dai balance too low');
     }) 
 
-    it.only('should NOT create a market order if SIDE is SELL and the token balance is too low', async () => {
+    it('should NOT create a market order if SIDE is SELL and the token balance is too low', async () => {
 
         await dex.deposit(
             web3.utils.toWei('99'),
